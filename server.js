@@ -14,7 +14,7 @@ mongoose
 
 // Define order schema
 const orderSchema = new mongoose.Schema({
-  orderId: { type: String, required: true },
+  orderId: { type: String, required: true ,unique: true},
   orderName: { type: String, required: true },
 });
 
@@ -42,6 +42,19 @@ app.post("/api/orders", async (req, res) => {
     res.status(500).send("Error saving order.");
   }
 });
+
+// Get request to show all orders in JSON format
+app.get("/api/orders", async (req, res) => {
+    try {
+      const orders = await Order.find();
+      res.json(orders);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Server error");
+    }
+  });
+  
+
 
 // Start server
 const port = process.env.PORT || 3000;
