@@ -1,16 +1,19 @@
-import OrderForm from "./OrderForm.js";
-import './OrderForm.css';
-import Navbar from './Navbar.js';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./pages/Navbar";
+import OrderForm from "./pages/OrderForm";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-    <Navbar />
-    <h1>Welcome to APML</h1>
-    <p>We offer the best services and products.</p>
-    <OrderForm />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<OrderForm />} />
+          <Route path="blogs" element={<OrderForm />} />
+          
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-export default App;
